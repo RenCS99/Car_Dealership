@@ -1,7 +1,12 @@
-# Project Diagrams
+## UML Use Cases
+Customers can sell, buy, and search cars.
 
-## UML Use Cases Diagram
+Employees can udpate pricing, inventory, and cars bought.
 
-## ER Diagram
+Employees can do car registrations.
 
-## Relational Table Diagram
+Employees and admins can login and log out.
+
+Admins can view cars sold and view cars bought.
+
+
