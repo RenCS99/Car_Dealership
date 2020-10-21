@@ -1,7 +1,7 @@
-#Project Diagrams
+# Project Diagrams
 
-##UML Use Cases Diagram
+## UML Use Cases Diagram
 
-##ER Diagram
+## ER Diagram
 
-##Relational Table Diagram
+## Relational Table Diagram
