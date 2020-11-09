@@ -122,16 +122,16 @@ INSERT INTO Vehicle VALUES(10, 3, 'CX-3', 2021, 'MAZDA', 'RED', 'SUBCOMPACT', '1
 
 -- Populating Sales Table
 
-INSERT INTO Sales VALUES(1, 6, 3, 7, '1XP7DB9XX5D823709', '2020-03-18', 40458);
-INSERT INTO Sales VALUES(2, 7, 2, 2, '5FNYF38649B059594', '2019-02-02', 43806);
-INSERT INTO Sales VALUES(3, 2, 1, 3, '1J4HR48N85C594885', '2020-09-20', 30913);
-INSERT INTO Sales VALUES(4, 1, 4, 4, '1GCEC19V64E399880', '2018-05-15', 50000);
-INSERT INTO Sales VALUES(5, 1, 2, 9, 'WVWAK73CX7P035949', '2019-01-19', 43541);
-INSERT INTO Sales VALUES(6, 4, 1, 10, '1GDGG31V531905513', '2019-06-17', 34140);
-INSERT INTO Sales VALUES(7, 4, 4, 1, 'WAUAF78E68A119556', '2020-12-05', 26854);
-INSERT INTO Sales VALUES(8, 9, 2, 5, '1N4AL21E78C153699', '2020-08-06', 69521);
-INSERT INTO Sales VALUES(9, 2, 3, 6, '1G1AK55F177302951', '2020-06-02', 49583);
-INSERT INTO Sales VALUES(10, 5, 5, 8, '4T1BF28B43U202258', '2017-05-01', 35680);
+INSERT INTO Sales(s_eid, s_did, s_cid, s_vin, s_date, s_price) VALUES(6, 3, 7, '1XP7DB9XX5D823709', '2020-03-18', 40458);
+INSERT INTO Sales(s_eid, s_did, s_cid, s_vin, s_date, s_price) VALUES(7, 2, 2, '5FNYF38649B059594', '2019-02-02', 43806);
+INSERT INTO Sales(s_eid, s_did, s_cid, s_vin, s_date, s_price) VALUES(2, 1, 3, '1J4HR48N85C594885', '2020-09-20', 30913);
+INSERT INTO Sales(s_eid, s_did, s_cid, s_vin, s_date, s_price) VALUES(1, 4, 4, '1GCEC19V64E399880', '2018-05-15', 50000);
+INSERT INTO Sales(s_eid, s_did, s_cid, s_vin, s_date, s_price) VALUES(1, 2, 9, 'WVWAK73CX7P035949', '2019-01-19', 43541);
+INSERT INTO Sales(s_eid, s_did, s_cid, s_vin, s_date, s_price) VALUES(4, 1, 10, '1GDGG31V531905513', '2019-06-17', 34140);
+INSERT INTO Sales(s_eid, s_did, s_cid, s_vin, s_date, s_price) VALUES(4, 4, 1, 'WAUAF78E68A119556', '2020-12-05', 26854);
+INSERT INTO Sales(s_eid, s_did, s_cid, s_vin, s_date, s_price) VALUES(9, 2, 5, '1N4AL21E78C153699', '2020-08-06', 69521);
+INSERT INTO Sales(s_eid, s_did, s_cid, s_vin, s_date, s_price) VALUES(2, 3, 6, '1G1AK55F177302951', '2020-06-02', 49583);
+INSERT INTO Sales(s_eid, s_did, s_cid, s_vin, s_date, s_price) VALUES(5, 5, 8, '4T1BF28B43U202258', '2017-05-01', 35680);
  
 -- Populating Customer Table
 
