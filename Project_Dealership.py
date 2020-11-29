@@ -30,7 +30,7 @@ def closeConnection(_conn, _dbFile):
 
 def startOptions(_conn, _dbFile):
     print("++++++++++++++++++++++++++++++++++")
-    print("Preparing the program")
+    print("Are you interested in buying or selling a car: ")
 
     
 
@@ -42,7 +42,9 @@ def main():
     # create a database connection
     conn = openConnection(database)
     with conn:
-        startOptions(conn)
+        startOptions(conn, database)
+
+    closeConnection(conn, database)
 
 
 if __name__ == '__main__':
