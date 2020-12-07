@@ -1,5 +1,11 @@
 import sqlite3
 from sqlite3 import Error
+import sys
+import os
+import traceback
+import hashlib
+import employeemenu
+import usermenu
 
 def openConnection(_dbFile):
     print("++++++++++++++++++++++++++++++++++")
@@ -17,34 +23,45 @@ def openConnection(_dbFile):
     return conn
 
 def closeConnection(_conn, _dbFile):
-    print("++++++++++++++++++++++++++++++++++")
-    print("Close database: ", _dbFile)
-
     try:
         _conn.close()
-        print("success")
+        print("Ended")
     except Error as e:
         print(e)
 
     print("++++++++++++++++++++++++++++++++++")
 
 def startOptions(_conn, _dbFile):
-    print("++++++++++++++++++++++++++++++++++")
-    print("Are you interested in buying or selling a car: ")
+    clearscreen()
+    x = 'n'
+    eid = 0
+    while (x == 'n'):
+        print("Welcome to the Main menu!")
+        x = input("Are you an employee or a customer? \n")
+        if x == "employee" or x == "e":
+            print("To return to the main menu type m")
+            employeemenu.main(_conn)
 
     
 
     print("++++++++++++++++++++++++++++++++++")
+
+
+def clearscreen():
+    os.system('clear')
 
 def main():
     database = r"data/Dealership.db"
 
     # create a database connection
     conn = openConnection(database)
+   
     with conn:
         startOptions(conn, database)
 
     closeConnection(conn, database)
+    
+
 
 
 if __name__ == '__main__':
