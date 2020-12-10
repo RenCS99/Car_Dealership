@@ -31,16 +31,27 @@ def closeConnection(_conn, _dbFile):
 
     print("++++++++++++++++++++++++++++++++++")
 
-def startOptions(_conn, _dbFile):
+def startOptions(_conn):
     clearscreen()
-    x = 'n'
-    eid = 0
-    while (x == 'n'):
+    
+    while True:
         print("Welcome to the Main menu!")
         x = input("Are you an employee or a customer? \n")
-        if x == "employee" or x == "e":
-            print("To return to the main menu type m")
-            employeemenu.main(_conn)
+        if x.lower() == "employee" or x.lower() == "e":
+            clearscreen()
+            eID = input("Please Enter your employee ID: ")
+            if employeemenu.verification(_conn,eID):
+                clearscreen()
+                print("Success")
+                employeemenu.main()
+                print("Failed")
+        elif x.lower() == "customer" or x.lower() == "c":
+            clearscreen()
+            customer.main(_conn)
+            sys.exit(0)
+        else:
+            z = input("Invalid Input. Press Enter to try again. \n")
+
 
     
 
@@ -57,7 +68,7 @@ def main():
     conn = openConnection(database)
    
     with conn:
-        startOptions(conn, database)
+        startOptions(conn)
 
     closeConnection(conn, database)
     
