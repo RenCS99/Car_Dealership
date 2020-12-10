@@ -6,6 +6,11 @@ def getDID(_conn, location):
     res = _conn.fetchall()
     return res[0][0]
 
+def getInvId(_conn, vin):
+    _conn.execute("SELECT i_inventoryId FROM Inventory WHERE i_vin = ?;", (vin,))
+    invId = _conn.fetchall()
+    return invId[0][0]
+
 def displayInv(_conn, location):
     _conn.execute("SELECT i_inventoryId, v_modelName, v_modelYear, i_condition, i_vin FROM Inventory, Vechile WHERE i_inventoryId = v_inventoryId AND i_location = ?;", (location,))
     l = '{:>} {:>} {:>} {:>} {:>} {:>}'.format("Inventory ID", "Model Name", "Model Year", "Location", "Condition", "VIN#")
@@ -33,8 +38,7 @@ def insertInv(_conn, location):
     _conn.execute("INSERT INTO Inventory(i_location, i_did, i_condition, i_oid, i_vin) VALUES(?,?,?,?,?);", (location, dId, inputVals[0], inputVals[1], inputVals[2],))
     _conn.commit()
 
-    _conn.execute("SELECT i_inventoryId FROM Inventory WHERE i_vin = ?;", (inputVals[2],))
-    invId = _conn.fetchall()
+    invId = getInvId(_conn, inputVals[2])
 
     _conn.execute("INSERT INTO Vehicle(v_modelName, v_modelYear, v_brandName, v_bodyStyle, v_color, v_price, v_inventoryId, v_manufacturer) VALUES(?,?,?,?,?,?,?,?);", (inputVals[3], inputVals[4], inputVals[5], inputVals[6], inputVals[7], inputVals[8], invId, inputVals[9],))
     _conn.commit()
@@ -54,18 +58,36 @@ def insertInv(_conn, location):
 
 
 def sellCar(_conn, location):
-    vinNum = input("Please type the VIN number for the vechicle: \n")
+    vinNum = input("Please type the VIN# for the vechicle: \n")
 
     dId = getDID(_conn, location)
 
-    for row in rows:
-        l = '{:<10} {:<20} {:>20} {:>20}'.format(row[0], row[1], row[2], row[3],row[4])
-        print(l)
+    invId = getInvId(_conn, vinNum)
+
+    removeCar(_conn, dId, location)
+    # for row in rows:
+    #     l = '{:<10} {:<20} {:>20} {:>20}'.format(row[0], row[1], row[2], row[3],row[4])
+    #     print(l)
 
 def changePricing(_conn, location):
-    return
+    vinNum = input("Please type the VIN# for the vehicle you want to change the price of: \n")
 
-def removeCar(_conn, location):
+    invId = getInvId(_conn, vinNum)
+
+    newPrice = input("Please enter the new price for the vehicle: \n")
+
+    _conn.execute("UPDATE Vehicle SET v_price = ? WHERE v_inventoryId = ?;", (newPrice, invId,))
+
+    _conn.execute("SELECT COUNT(*) FROM Vehicle WHERE v_inventoryId = ? AND v_price = ?;", (invId, newPrice,))
+    count = _conn.fetchall()
+
+    if count[0][0] == 1:
+        print("Price successfully updated")
+    else:
+        print("Failed to update price")
+    
+
+def removeCar(_conn, dId, location):
     return
 
 def lookForInv(_conn, location):

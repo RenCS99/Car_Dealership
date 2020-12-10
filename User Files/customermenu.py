@@ -20,6 +20,7 @@ def buy_car_menu:
     print("\t 5. Search by year")
 
 def buy_car:
+    print(".")
     
 
 
