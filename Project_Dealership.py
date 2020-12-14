@@ -5,7 +5,7 @@ import os
 import traceback
 import hashlib
 import employeemenu
-import usermenu
+import customer
 
 def openConnection(_dbFile):
     print("++++++++++++++++++++++++++++++++++")
@@ -43,20 +43,14 @@ def startOptions(_conn):
             if employeemenu.verification(_conn,eID):
                 clearscreen()
                 print("Success")
-                employeemenu.main()
+                employeemenu.main(_conn)
                 print("Failed")
         elif x.lower() == "customer" or x.lower() == "c":
             clearscreen()
             customer.main(_conn)
             sys.exit(0)
         else:
-            z = input("Invalid Input. Press Enter to try again. \n")
-
-
-    
-
-    print("++++++++++++++++++++++++++++++++++")
-
+            print("Invalid Input. Press Enter to try again. \n")
 
 def clearscreen():
     os.system('clear')
