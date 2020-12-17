@@ -8,6 +8,7 @@ def getDID(_conn, location):
     res = s.fetchall()
     return res[0][0]
 
+
 def getInvId(_conn, vin):
     s = _conn.cursor()
     s.execute("SELECT i_inventoryId FROM Inventory WHERE i_vin = ?;", (vin,))
@@ -22,13 +23,13 @@ def getCID(_conn, cName):
 
 def displayInv(_conn, location):
     s = _conn.cursor()
-    s.execute("SELECT i_inventoryId, v_brandName, v_modelName, v_modelYear, i_condition, i_vin FROM Inventory,Vehicle WHERE i_inventoryId = v_inventoryId AND i_location = ?;", (location,))
-    l = '{:>} {:>} {:>} {:>} {:>} {:>}'.format("Inventory ID", "Brand Name","Model Name", "Model Year", "Condition", "VIN#")
-    print(l + "\n")
+    s.execute("SELECT i_inventoryId, v_brandName, v_modelName, v_modelYear, i_condition, i_vin FROM Inventory, Vehicle WHERE v_inventoryId = i_inventoryId AND i_location = ?;", (location,))
+    l = '{:<10} {:<10} {:>30} {:>25} {:>20} {:>20}'.format("Inventory ID  |  ", "Brand Name  |  ","Model Name  |  ", "Model Year  |  ", "Condition  |  ", "VIN#")
+    print(l)
     rows = s.fetchall()
     for row in rows:
-        l = '{:>} {:>} {:>} {:>} {:>} {:>}'.format(row[0], row[1], row[2], row[3], row[4], row[5])
-        print(l + "\n")
+        l = '{:<10} {:<10} {:>30} {:>25} {:>20} {:>20}'.format(row[0], row[1], row[2], row[3], row[4], row[5])
+        print(l)
 
 
 def insertInv(_conn, location):
@@ -160,10 +161,10 @@ def lookForInv(_conn, location):
         else:
             return
     else:
-        l = '{:>} {:>} {:>} {:>} {:>} {:>} {:>} {:>}'.format("Vehicle_ID", "Model Name", "Model Year", "Brand Name", "Color", "Price", "Inventory ID", "Manufacturer")
-        print(l + "\n")
+        l = '{:<10} {:<10} {:>30} {:>25} {:>20} {:>20} {:>20} {:>20}'.format("Vehicle_ID  |  ", "Model Name  |  ", "Model Year  |  ", "Brand Name  |  ", "Color  |  ", "Price  |  ", "Inventory ID  |  ", "Manufacturer")
+        print(l)
         for res in results:
-            l = '{:>} {:>} {:>} {:>} {:>} {:>} {:>} {:>}'.format(res[0], res[1], res[2], res[3], res[4], res[5], res[6], res[7])
-            print(l + "\n")
+            l = '{:<10} {:<10} {:>30} {:>25} {:>20} {:>20} {:>20} {:>20}'.format(res[0], res[1], res[2], res[3], res[4], res[5], res[6], res[7])
+            print(l)
         return
 

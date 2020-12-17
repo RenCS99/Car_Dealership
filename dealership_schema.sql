@@ -1,12 +1,12 @@
 CREATE TABLE Employee(
     e_eid INTEGER PRIMARY KEY NOT NULL,
-    e_did INTEGER NOT NULL,
+    e_did INTEGER NOT NULL
 );
 
 CREATE TABLE Dealer(
     d_did INTEGER PRIMARY KEY AUTOINCREMENT,
     d_name TEXT NOT NULL,
-    d_location TEXT NOT NULL,
+    d_location TEXT NOT NULL
 );
 
 CREATE TABLE Inventory(
@@ -80,16 +80,16 @@ INSERT INTO Employee VALUES(10, 8);
 
 -- Populating Dealer Table
 
-INSERT INTO Dealer(d_name, d_locaiton) VALUES('Choice Vehicles', 'ALABAMA');
-INSERT INTO Dealer(d_name, d_locaiton) VALUES('Auto Mart', 'CALIFORNIA');
-INSERT INTO Dealer(d_name, d_locaiton) VALUES('Anycar', 'WASHINGTON');
-INSERT INTO Dealer(d_name, d_locaiton) VALUES('Auto Sales', 'TEXAS');
-INSERT INTO Dealer(d_name, d_locaiton) VALUES('Discount Motors', 'FLORIDA');
-INSERT INTO Dealer(d_name, d_locaiton) VALUES('Used Cars 4 You', 'COLORADO');
-INSERT INTO Dealer(d_name, d_locaiton) VALUES('Auto Wizard', 'ARIZONA');
-INSERT INTO Dealer(d_name, d_locaiton) VALUES('Village Auto', 'MASSACHUSETTS');
-INSERT INTO Dealer(d_name, d_locaiton) VALUES('Vance Ford', 'UTAH');
-INSERT INTO Dealer(d_name, d_locaiton) VALUES('Grand Touring Cars INC', 'NEVADA');     
+INSERT INTO Dealer(d_name, d_location) VALUES('Choice Vehicles', 'ALABAMA');
+INSERT INTO Dealer(d_name, d_location) VALUES('Auto Mart', 'CALIFORNIA');
+INSERT INTO Dealer(d_name, d_location) VALUES('Anycar', 'WASHINGTON');
+INSERT INTO Dealer(d_name, d_location) VALUES('Auto Sales', 'TEXAS');
+INSERT INTO Dealer(d_name, d_location) VALUES('Discount Motors', 'FLORIDA');
+INSERT INTO Dealer(d_name, d_location) VALUES('Used Cars 4 You', 'COLORADO');
+INSERT INTO Dealer(d_name, d_location) VALUES('Auto Wizard', 'ARIZONA');
+INSERT INTO Dealer(d_name, d_location) VALUES('Village Auto', 'MASSACHUSETTS');
+INSERT INTO Dealer(d_name, d_location) VALUES('Vance Ford', 'UTAH');
+INSERT INTO Dealer(d_name, d_location) VALUES('Grand Touring Cars INC', 'NEVADA');     
 
 -- Populating Inventory Table
 

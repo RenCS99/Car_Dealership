@@ -50,19 +50,19 @@ def verification(_conn, eID):
                     location = "TEXAS"
                     i = -1
                 elif dId == '5':
-                    location = "Florida"
+                    location = "FLORIDA"
                     i = -1
                 elif dId == '6':
-                    location = "Colorado"
+                    location = "COLORADO"
                     i = -1
                 elif dId == '7':
-                    location = "Arizona"
+                    location = "ARIZONA"
                     i = -1
                 elif dId == '8':
-                    location = "Massachusetts"
+                    location = "MASSACHUSETTS"
                     i = -1
                 elif dId == '9':
-                    location = "Utah"
+                    location = "UTAH"
                     i = -1
                 elif dId == '10':
                     location = "NEVADA"
@@ -88,7 +88,7 @@ def main(_conn):
         employee_selections()
         userInput = input("")
         if userInput == '0':
-            return
+            sys.exit(0)
         elif userInput == '1':
             employeemenuselections.displayInv(_conn, location)
         elif userInput == '2':
@@ -101,5 +101,4 @@ def main(_conn):
             employeemenuselections.lookForInv(_conn, location)
         else:
             print("Unknown Choice")
-
-        #uinput = input("To return to menu press enter otherwise type 0 to exit:  ")
+            uinput = input("To return to menu press enter otherwise type 0 to exit:  ")

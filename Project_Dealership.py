@@ -6,36 +6,33 @@ import traceback
 import hashlib
 import employeemenu
 import customer
+import csv
 
 def openConnection(_dbFile):
-    print("++++++++++++++++++++++++++++++++++")
     print("Open database: ", _dbFile)
 
     conn = None
     try:
         conn = sqlite3.connect(_dbFile)
-        print("success")
+        
     except Error as e:
         print(e)
 
-    print("++++++++++++++++++++++++++++++++++")
+   
 
     return conn
 
 def closeConnection(_conn, _dbFile):
     try:
         _conn.close()
-        print("Ended")
+        
     except Error as e:
         print(e)
 
-    print("++++++++++++++++++++++++++++++++++")
-
+   
 def startOptions(_conn):
-    clearscreen()
-    
+    print("Welcome to the Main menu!")
     while True:
-        print("Welcome to the Main menu!")
         x = input("Are you an employee or a customer? \n")
         if x.lower() == "employee" or x.lower() == "e":
             clearscreen()
@@ -44,13 +41,19 @@ def startOptions(_conn):
                 clearscreen()
                 print("Success")
                 employeemenu.main(_conn)
-                print("Failed")
+                sys.exit(0)
+            else:    
+                print("Failed Try Again.")
+                employeemenu.verification(_conn,eID)
+                
         elif x.lower() == "customer" or x.lower() == "c":
-            clearscreen()
+            print("Welcome!")
             customer.main(_conn)
             sys.exit(0)
         else:
             print("Invalid Input. Press Enter to try again. \n")
+            print("Hit Enter to retry: ")
+            zxc = input()
 
 def clearscreen():
     os.system('clear')
@@ -60,14 +63,27 @@ def main():
 
     # create a database connection
     conn = openConnection(database)
+    populateDB(conn)
    
     with conn:
         startOptions(conn)
 
     closeConnection(conn, database)
     
+def populateDB(conn):
+    cur = conn.cursor()
+    a_file = open("Inventory.csv")
+    rows = csv.reader(a_file)
+    cur.executemany("INSERT INTO Inventory(i_location, i_did, i_condition, i_oid, i_vin) VALUES(?,?,?,?,?)", rows)
+    conn.commit()
+    
 
-
+    b_file = open("vehicles.csv")
+    rows = csv.reader(b_file)
+    cur.executemany("INSERT INTO Vehicle(v_modelName, v_modelYear, v_brandName, v_bodyStyle, v_color, v_price, v_inventoryId, v_manufacturer) VALUES(?,?,?,?,?,?,?,?)", rows)
+    conn.commit()
+    
+    
 
 if __name__ == '__main__':
     main()

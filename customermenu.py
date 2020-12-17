@@ -62,19 +62,19 @@ def choice_of_location():
             location = "TEXAS"
             return location
         elif dId == '5':
-            location = "Florida"
+            location = "FLORIDA"
             return location
         elif dId == '6':
-            location = "Colorado"
+            location = "COLORADO"
             return location
         elif dId == '7':
-            location = "Arizona"
+            location = "ARIZONA"
             return location
         elif dId == '8':
-            location = "Massachusetts"
+            location = "MASSACHUSETTS"
             return location
         elif dId == '9':
-            location = "Utah"
+            location = "UTAH"
             return location
         elif dId == '10':
             location = "NEVADA"
@@ -135,7 +135,7 @@ def sell_car_menu(s):
         s.execute("INSERT INTO Sales(s_eid,s_did,s_cid,s_vin,s_date,s_saleMethod,s_price) VALUES(?,?,?,?,datetime('now','localtime'),'B',?);", (eId,inputVals[10],cId, inputVals[2],inputVals[8]) )
         s.execute("INSERT into Inventory(i_location, i_did, i_condition, i_oid, i_vin) VALUES(?,?,?,?,?);", (inputVals[10], dId, inputVals[0], inputVals[1], inputVals[2],))
         invId = getInvId(s, inputVals[2])
-        s.execute("INSERT INTO Vehicles(v_modelName,v_modelYear, v_brandName, v_bodyStyle, v_color, v_price, v_inventoryId, v_manufacturer) VALUES(?,?,?,?,?,?,?,?);", (inputVals[3],inputVals[4],inputVals[5],inputVals[6],inputVals[7],inputsVals[8],invId,inputVals[9],))
+        s.execute("INSERT INTO Vehicles(v_modelName,v_modelYear, v_brandName, v_bodyStyle, v_color, v_price, v_inventoryId, v_manufacturer) VALUES(?,?,?,?,?,?,?,?);", (inputVals[3],inputVals[4],inputVals[5],inputVals[6],inputVals[7],inputVals[8],invId,inputVals[9],))
         print("Thank you for doing business with us.")
     elif inRes == 'n' or inRes == 'no':
         print("We are sorry to hear that. Your business is always welcome.")
@@ -156,12 +156,12 @@ def view_all_listed_cars(_conn):
             s = _conn.cursor()
             s.execute("SELECT i_inventoryId, v_brandName, v_modelName, v_modelYear, i_location, i_condition, i_vin FROM Inventory, Vehicle WHERE i_inventoryId = v_inventoryId;")
             rows = s.fetchall()
-            l = '{:>} {:>} {:>} {:>} {:>} {:>} {:>}'.format("Inventory ID", "Brand Name","Model Name", "Model Year", "Location", "Condition", "VIN#")
-            print(l + "\n")
+            l = '{:<10} {:<10} {:>30} {:>25} {:>20} {:>20} {:>20}'.format("Inventory ID  |  ", "Brand Name  |  ","Model Name  |  ", "Model Year  |  ", "Location  |  ", "Condition  |  ", "VIN#")
+            print(l)
             
             for row in rows:
-                l = '{:>} {:>} {:>} {:>} {:>} {:>} {:>}'.format(row[0], row[1], row[2], row[3], row[4], row[5], row[6])
-                print(l + "\n")
+                l = '{:<10} {:<10} {:>30} {:>25} {:>20} {:>20} {:>20}'.format(row[0], row[1], row[2], row[3], row[4], row[5], row[6])
+                print(l)
             i = -1
 
         elif choice.lower() == "one" or choice.upper() == "ONE" or choice.lower() == "o" or choice.upper() == "O":
@@ -169,12 +169,12 @@ def view_all_listed_cars(_conn):
             s = _conn.cursor()
             s.execute("SELECT i_inventoryId, v_brandName, v_modelName, v_modelYear, i_location, i_condition, i_vin FROM Inventory,Vehicle WHERE i_inventoryId = v_inventoryId AND i_location = ?;", (inputLoc,))
             rows = s.fetchall()
-            l = '{:>} {:>} {:>} {:>} {:>} {:>} {:>}'.format("Inventory ID", "Brand Name","Model Name", "Model Year", "Location", "Condition", "VIN#")
-            print(l + "\n")
+            l = '{:<10} {:<10} {:>30} {:>25} {:>20} {:>20} {:>20}'.format("Inventory ID  |  ", "Brand Name  |  ","Model Name  |  ", "Model Year  |  ", "Location  |  ", "Condition  |  ", "VIN#")
+            print(l)
             
             for row in rows:
-                l = '{:>} {:>} {:>} {:>} {:>} {:>} {:>}'.format(row[0], row[1], row[2], row[3], row[4], row[5], row[6])
-                print(l + "\n")
+                l = '{:<10} {:<10} {:>30} {:>25} {:>20} {:>20} {:>20}'.format(row[0], row[1], row[2], row[3], row[4], row[5], row[6])
+                print(l)
             i = -1
 
         else:
@@ -195,18 +195,25 @@ def priceSearch(s):
             return
         else:
             return
-    else:           
+    else:
+        l = '{:<10} {:<10} {:>30} {:>25} {:>20} {:>20} {:>20} {:>20} {:>20}'.format("Vehicle ID  |  ", "Model Name  |  ","Model Year  |  ", "Brand Name  |  ", "Body Style  |  ", "Color  |  ", "Price  |  ", "Inventory ID  |  ", "Manufacturer")
+        print(l)           
         for res in results:
-            l = '{:>} {:>} {:>} {:>} {:>} {:>} {:>} {:>} {:>}'.format(res[0], res[1], res[2], res[3], res[4], res[5], res[6], res[7], res[8])
-            print(l + "\n")
-            return
+            l = '{:<10} {:<10} {:>30} {:>25} {:>20} {:>20} {:>20} {:>20} {:>20}'.format(res[0], res[1], res[2], res[3], res[4], res[5], res[6], res[7], res[8])
+            print(l)
+        return
 
 def locationSearch(s):
     print("\t 1. ALABAMA")
     print("\t 2. CALIFORNIA")
     print("\t 3. WASHINGTON")
     print("\t 4. TEXAS")
-    print("\t 5. NEVADA \n")
+    print("\t 5. FLORIDA")
+    print("\t 6. COLORADO")
+    print("\t 7. ARIZONA")
+    print("\t 8. MASSACHUSETTS")
+    print("\t 9. UTAH")
+    print("\t 10. NEVADA \n")
     while True:
         l_input = input("Please select your location: ")
 
@@ -214,56 +221,111 @@ def locationSearch(s):
             l_input = "ALABAMA"
             s.execute("Select i_inventoryId, v_brandName, v_modelName, v_modelYear, i_location, i_condition FROM Inventory, Vehicle WHERE i_location = ? AND v_inventoryId = i_inventoryId", (l_input,))
             rows = s.fetchall()
-            l = '{:>} {:>} {:>} {:>} {:>} {:>}'.format("Inventory ID", "Brand Name","Model Name", "Model Year", "Location", "Condition")
-            print(l + "\n")
+            l = '{:<10} {:<10} {:>30} {:>25} {:>20} {:>20}'.format("Inventory ID  |  ", "Brand Name  |  ","Model Name  |  ", "Model Year  |  ", "Location  |  ", "Condition")
+            print(l)
             
             for row in rows:
-                l = '{:>} {:>} {:>} {:>} {:>} {:>}'.format(row[0], row[1], row[2], row[3], row[4], row[5])
-                print(l + "\n")
+                l = '{:<10} {:<10} {:>30} {:>25} {:>20} {:>20}'.format(row[0], row[1], row[2], row[3], row[4], row[5])
+                print(l)
             return
         elif l_input == "2":
             l_input = "CALIFORNIA"
             s.execute("Select i_inventoryId, v_brandName, v_modelName, v_modelYear, i_location, i_condition FROM Inventory, Vehicle WHERE i_location = ? AND v_inventoryId = i_inventoryId", (l_input,))
             rows = s.fetchall()
-            l = '{:>} {:>} {:>} {:>} {:>} {:>}'.format("Inventory ID", "Brand Name","Model Name", "Model Year", "Location", "Condition")
-            print(l + "\n")
+            l = '{:<10} {:<10} {:>30} {:>25} {:>20} {:>20}'.format("Inventory ID  |  ", "Brand Name  |  ","Model Name  |  ", "Model Year  |  ", "Location  |  ", "Condition")
+            print(l)
             
             for row in rows:
-                l = '{:>} {:>} {:>} {:>} {:>} {:>}'.format(row[0], row[1], row[2], row[3], row[4], row[5])
-                print(l + "\n")
+                l = '{:<10} {:<10} {:>30} {:>25} {:>20} {:>20}'.format(row[0], row[1], row[2], row[3], row[4], row[5])
+                print(l)
             return
         elif l_input == "3":
             l_input = "WASHINGTON"
             s.execute("Select i_inventoryId, v_brandName, v_modelName, v_modelYear, i_location, i_condition FROM Inventory, Vehicle WHERE i_location = ? AND v_inventoryId = i_inventoryId", (l_input,))
             rows = s.fetchall()
-            l = '{:>} {:>} {:>} {:>} {:>} {:>}'.format("Inventory ID", "Brand Name","Model Name", "Model Year", "Location", "Condition")
-            print(l + "\n")
+            l = '{:<10} {:<10} {:>30} {:>25} {:>20} {:>20}'.format("Inventory ID  |  ", "Brand Name  |  ","Model Name  |  ", "Model Year  |  ", "Location  |  ", "Condition")
+            print(l)
             
             for row in rows:
-                l = '{:>} {:>} {:>} {:>} {:>} {:>}'.format(row[0], row[1], row[2], row[3], row[4], row[5])
-                print(l + "\n")
+                l = '{:<10} {:<10} {:>30} {:>25} {:>20} {:>20}'.format(row[0], row[1], row[2], row[3], row[4], row[5])
+                print(l)
             return
         elif l_input == "4":
             l_input = "TEXAS"
             s.execute("Select i_inventoryId, v_brandName, v_modelName, v_modelYear, i_location, i_condition FROM Inventory, Vehicle WHERE i_location = ? AND v_inventoryId = i_inventoryId", (l_input,))
             rows = s.fetchall()
-            l = '{:>} {:>} {:>} {:>} {:>} {:>}'.format("Inventory ID", "Brand Name","Model Name", "Model Year", "Location", "Condition")
-            print(l + "\n")
+            l = '{:<10} {:<10} {:>30} {:>25} {:>20} {:>20}'.format("Inventory ID  |  ", "Brand Name  |  ","Model Name  |  ", "Model Year  |  ", "Location  |  ", "Condition  |  ")
+            print(l)
             
             for row in rows:
-                l = '{:>} {:>} {:>} {:>} {:>} {:>}'.format(row[0], row[1], row[2], row[3], row[4], row[5])
-                print(l + "\n")
+                l = '{:<10} {:<10} {:>30} {:>25} {:>20} {:>20}'.format(row[0], row[1], row[2], row[3], row[4], row[5])
+                print(l)
             return
         elif l_input == "5":
+            l_input = "FLORIDA"
+            s.execute("Select i_inventoryId, v_brandName, v_modelName, v_modelYear, i_location, i_condition FROM Inventory, Vehicle WHERE i_location = ? AND v_inventoryId = i_inventoryId", (l_input,))
+            rows = s.fetchall()
+            l = '{:<10} {:<10} {:>30} {:>25} {:>20} {:>20}'.format("Inventory ID  |  ", "Brand Name  |  ","Model Name  |  ", "Model Year  |  ", "Location  |  ", "Condition")
+            print(l)
+            
+            for row in rows:
+                l = '{:<10} {:<10} {:>30} {:>25} {:>20} {:>20}'.format(row[0], row[1], row[2], row[3], row[4], row[5])
+                print(l)
+            return
+        elif l_input == "6":
+            l_input = "COLORADO"
+            s.execute("Select i_inventoryId, v_brandName, v_modelName, v_modelYear, i_location, i_condition FROM Inventory, Vehicle WHERE i_location = ? AND v_inventoryId = i_inventoryId", (l_input,))
+            rows = s.fetchall()
+            l = '{:<10} {:<10} {:>30} {:>25} {:>20} {:>20}'.format("Inventory ID  |  ", "Brand Name  |  ","Model Name  |  ", "Model Year  |  ", "Location  |  ", "Condition")
+            print(l)
+            
+            for row in rows:
+                l = '{:<10} {:<10} {:>30} {:>25} {:>20} {:>20}'.format(row[0], row[1], row[2], row[3], row[4], row[5])
+                print(l)
+            return
+        elif l_input == "7":
+            l_input = "ARIZONA"
+            s.execute("Select i_inventoryId, v_brandName, v_modelName, v_modelYear, i_location, i_condition FROM Inventory, Vehicle WHERE i_location = ? AND v_inventoryId = i_inventoryId", (l_input,))
+            rows = s.fetchall()
+            l = '{:<10} {:<10} {:>30} {:>25} {:>20} {:>20}'.format("Inventory ID  |  ", "Brand Name  |  ","Model Name  |  ", "Model Year  |  ", "Location  |  ", "Condition")
+            print(l)
+            
+            for row in rows:
+                l = '{:<10} {:<10} {:>30} {:>25} {:>20} {:>20}'.format(row[0], row[1], row[2], row[3], row[4], row[5])
+                print(l)
+            return
+        elif l_input == "8":
+            l_input = "MASSACHUSETTS"
+            s.execute("Select i_inventoryId, v_brandName, v_modelName, v_modelYear, i_location, i_condition FROM Inventory, Vehicle WHERE i_location = ? AND v_inventoryId = i_inventoryId", (l_input,))
+            rows = s.fetchall()
+            l = '{:<10} {:<10} {:>30} {:>25} {:>20} {:>20}'.format("Inventory ID  |  ", "Brand Name  |  ","Model Name  |  ", "Model Year  |  ", "Location  |  ", "Condition")
+            print(l)
+            
+            for row in rows:
+                l = '{:<10} {:<10} {:>30} {:>25} {:>20} {:>20}'.format(row[0], row[1], row[2], row[3], row[4], row[5])
+                print(l)
+            return
+        elif l_input == "9":
+            l_input = "UTAH"
+            s.execute("Select i_inventoryId, v_brandName, v_modelName, v_modelYear, i_location, i_condition FROM Inventory, Vehicle WHERE i_location = ? AND v_inventoryId = i_inventoryId", (l_input,))
+            rows = s.fetchall()
+            l = '{:<10} {:<10} {:>30} {:>25} {:>20} {:>20}'.format("Inventory ID  |  ", "Brand Name  |  ","Model Name  |  ", "Model Year  |  ", "Location  |  ", "Condition")
+            print(l)
+            
+            for row in rows:
+                l = '{:<10} {:<10} {:>30} {:>25} {:>20} {:>20}'.format(row[0], row[1], row[2], row[3], row[4], row[5])
+                print(l)
+            return
+        elif l_input == "10":
             l_input = "NEVADA"
             s.execute("Select i_inventoryId, v_brandName, v_modelName, v_modelYear, i_location, i_condition FROM Inventory, Vehicle WHERE i_location = ? AND v_inventoryId = i_inventoryId", (l_input,))
             rows = s.fetchall()
-            l = '{:>} {:>} {:>} {:>} {:>} {:>}'.format("Inventory ID", "Brand Name","Model Name", "Model Year", "Location", "Condition")
-            print(l + "\n")
+            l = '{:<10} {:<10} {:>30} {:>25} {:>20} {:>20}'.format("Inventory ID  |  ", "Brand Name  |  ","Model Name  |  ", "Model Year  |  ", "Location  |  ", "Condition")
+            print(l)
             
             for row in rows:
-                l = '{:>} {:>} {:>} {:>} {:>} {:>}'.format(row[0], row[1], row[2], row[3], row[4], row[5])
-                print(l + "\n")
+                l = '{:<10} {:<10} {:>30} {:>25} {:>20} {:>20}'.format(row[0], row[1], row[2], row[3], row[4], row[5])
+                print(l)
             return
         else:
             x = input("Invalid Selection Press enter to try again.")
@@ -276,10 +338,11 @@ def make_model_search(s):
     if [x[0] for x in results] == []:
         print("No results found")
         return
-    else:           
+    else:
+        l = '{:<10} {:<10} {:>30} {:>25} {:>20} {:>20} {:>20} {:>20} {:>20}'.format("Vehicle ID  |  ", "Model Name  |  ","Model Year  |  ", "Brand Name  |  ", "Body Style  |  ", "Color  |  ", "Price  |  ", "Inventory ID  |  ", "Manufacturer")
         for res in results:
-            l = '{:>} {:>} {:>} {:>} {:>} {:>} {:>} {:>} {:>}'.format(res[0], res[1], res[2], res[3], res[4], res[5], res[6], res[7], res[8])
-            print(l + '\n')
+            l = '{:<10} {:<10} {:>30} {:>25} {:>20} {:>20} {:>20} {:>20} {:>20}'.format(res[0], res[1], res[2], res[3], res[4], res[5], res[6], res[7], res[8])
+            print(l)
     return
 
 def bodytype_search(s):
@@ -303,11 +366,11 @@ def bodytype_search(s):
                 return
             else:
                 print("\n")
-                l = '{:>} {:>} {:>} {:>} {:>} {:>} {:>} {:>} {:>}'.format("Vehicle_ID", "Model Name", "Model Year", "Brand Name", "Body Style", "Color", "Price", "Inventory_ID", "Manufacturer")
-                print(l + "\n")           
+                l = '{:<10} {:<10} {:>30} {:>25} {:>20} {:>20} {:>20} {:>20} {:>20}'.format("Vehicle_ID  |  ", "Model Name  |  ", "Model Year  |  ", "Brand Name  |  ", "Body Style  |  ", "Color  |  ", "Price  |  ", "Inventory_ID  |  ", "Manufacturer")
+                print(l)           
                 for res in results:
-                    l = '{:>} {:>} {:>} {:>} {:>} {:>} {:>} {:>} {:>}'.format(res[0], res[1], res[2], res[3], res[4], res[5], res[6], res[7], res[8])
-                    print(l + "\n")
+                    l = '{:<10} {:<10} {:>30} {:>25} {:>20} {:>20} {:>20} {:>20} {:>20}'.format(res[0], res[1], res[2], res[3], res[4], res[5], res[6], res[7], res[8])
+                    print(l)
             return
 
         elif bodyType == "2":
@@ -320,11 +383,11 @@ def bodytype_search(s):
                 return
             else:       
                 print("\n")
-                l = '{:>} {:>} {:>} {:>} {:>} {:>} {:>} {:>} {:>}'.format("Vehicle_ID", "Model Name", "Model Year", "Brand Name", "Body Style", "Color", "Price", "Inventory_ID", "Manufacturer")
-                print(l + "\n")    
+                l = '{:<10} {:<10} {:>30} {:>25} {:>20} {:>20} {:>20} {:>20} {:>20}'.format("Vehicle_ID  |  ", "Model Name  |  ", "Model Year  |  ", "Brand Name  |  ", "Body Style  |  ", "Color  |  ", "Price  |  ", "Inventory_ID  |  ", "Manufacturer")
+                print(l)    
                 for res in results:
-                    l = '{:>} {:>} {:>} {:>} {:>} {:>} {:>} {:>} {:>}'.format(res[0], res[1], res[2], res[3], res[4], res[5], res[6], res[7], res[8])
-                    print(l + "\n")
+                    l = '{:<10} {:<10} {:>30} {:>25} {:>20} {:>20} {:>20} {:>20} {:>20}'.format(res[0], res[1], res[2], res[3], res[4], res[5], res[6], res[7], res[8])
+                    print(l)
             return
 
         elif bodyType == "3":
@@ -337,11 +400,11 @@ def bodytype_search(s):
                 return
             else:           
                 print("\n")
-                l = '{:>} {:>} {:>} {:>} {:>} {:>} {:>} {:>} {:>}'.format("Vehicle_ID", "Model Name", "Model Year", "Brand Name", "Body Style", "Color", "Price", "Inventory_ID", "Manufacturer")
-                print(l + "\n") 
+                l = '{:<10} {:<10} {:>30} {:>25} {:>20} {:>20} {:>20} {:>20} {:>20}'.format("Vehicle_ID  |  ", "Model Name  |  ", "Model Year  |  ", "Brand Name  |  ", "Body Style  |  ", "Color  |  ", "Price  |  ", "Inventory_ID  |  ", "Manufacturer")
+                print(l) 
                 for res in results:
-                    l = '{:>} {:>} {:>} {:>} {:>} {:>} {:>} {:>} {:>}'.format(res[0], res[1], res[2], res[3], res[4], res[5], res[6], res[7], res[8])
-                    print(l + "\n")
+                    l = '{:<10} {:<10} {:>30} {:>25} {:>20} {:>20} {:>20} {:>20} {:>20}'.format(res[0], res[1], res[2], res[3], res[4], res[5], res[6], res[7], res[8])
+                    print(l)
             return
 
         elif bodyType == "4":
@@ -354,11 +417,11 @@ def bodytype_search(s):
                 return
             else:           
                 print("\n")
-                l = '{:>} {:>} {:>} {:>} {:>} {:>} {:>} {:>} {:>}'.format("Vehicle_ID", "Model Name", "Model Year", "Brand Name", "Body Style", "Color", "Price", "Inventory_ID", "Manufacturer")
-                print(l + "\n") 
+                l = '{:<10} {:<10} {:>30} {:>25} {:>20} {:>20} {:>20} {:>20} {:>20}'.format("Vehicle_ID  |  ", "Model Name  |  ", "Model Year  |  ", "Brand Name  |  ", "Body Style  |  ", "Color  |  ", "Price  |  ", "Inventory_ID  |  ", "Manufacturer")
+                print(l) 
                 for res in results:
-                    l = '{:>} {:>} {:>} {:>} {:>} {:>} {:>} {:>} {:>}'.format(res[0], res[1], res[2], res[3], res[4], res[5], res[6], res[7], res[8])
-                    print(l + "\n")
+                    l = '{:<10} {:<10} {:>30} {:>25} {:>20} {:>20} {:>20} {:>20} {:>20}'.format(res[0], res[1], res[2], res[3], res[4], res[5], res[6], res[7], res[8])
+                    print(l)
             return
 
         elif bodyType == "5":
@@ -371,11 +434,11 @@ def bodytype_search(s):
                 return
             else:     
                 print("\n")
-                l = '{:>} {:>} {:>} {:>} {:>} {:>} {:>} {:>} {:>}'.format("Vehicle_ID", "Model Name", "Model Year", "Brand Name", "Body Style", "Color", "Price", "Inventory_ID", "Manufacturer")
-                print(l + "\n")       
+                l = '{:<10} {:<10} {:>30} {:>25} {:>20} {:>20} {:>20} {:>20} {:>20}'.format("Vehicle_ID  |  ", "Model Name  |  ", "Model Year  |  ", "Brand Name  |  ", "Body Style  |  ", "Color  |  ", "Price  |  ", "Inventory_ID  |  ", "Manufacturer")
+                print(l)       
                 for res in results:
-                    l = '{:>} {:>} {:>} {:>} {:>} {:>} {:>} {:>} {:>}'.format(res[0], res[1], res[2], res[3], res[4], res[5], res[6], res[7], res[8])
-                    print(l + "\n")
+                    l = '{:<10} {:<10} {:>30} {:>25} {:>20} {:>20} {:>20} {:>20} {:>20}'.format(res[0], res[1], res[2], res[3], res[4], res[5], res[6], res[7], res[8])
+                    print(l)
             return 
 
         elif bodyType == "6":
@@ -388,11 +451,11 @@ def bodytype_search(s):
                 return
             else:      
                 print("\n")
-                l = '{:>} {:>} {:>} {:>} {:>} {:>} {:>} {:>} {:>}'.format("Vehicle_ID", "Model Name", "Model Year", "Brand Name", "Body Style", "Color", "Price", "Inventory_ID", "Manufacturer")
-                print(l + "\n")      
+                l = '{:<10} {:<10} {:>30} {:>25} {:>20} {:>20} {:>20} {:>20} {:>20}'.format("Vehicle_ID  |  ", "Model Name  |  ", "Model Year  |  ", "Brand Name  |  ", "Body Style  |  ", "Color  |  ", "Price  |  ", "Inventory_ID  |  ", "Manufacturer")
+                print(l)      
                 for res in results:
-                    l = '{:>} {:>} {:>} {:>} {:>} {:>} {:>} {:>} {:>}'.format(res[0], res[1], res[2], res[3], res[4], res[5], res[6], res[7], res[8])
-                    print(l + "\n")
+                    l = '{:<10} {:<10} {:>30} {:>25} {:>20} {:>20} {:>20} {:>20} {:>20}'.format(res[0], res[1], res[2], res[3], res[4], res[5], res[6], res[7], res[8])
+                    print(l)
             return
         else:
             nb = input("Invalid car body style")
@@ -409,8 +472,8 @@ def yearSearch(s):
     else:
         print("Showing results from filtered search based on the year range: " + bYear + "-" + aYear)           
         for res in results:
-            l = '{:>} {:>} {:>} {:>} {:>} {:>} {:>} {:>} {:>}'.format(res[0], res[1], res[2], res[3], res[4], res[5], res[6], res[7], res[8])
-            print(l + '\n')
+            l = '{:<10} {:<10} {:>30} {:>25} {:>20} {:>20} {:>20} {:>20} {:>20}'.format(res[0], res[1], res[2], res[3], res[4], res[5], res[6], res[7], res[8])
+            print(l)
     return
     
 def buymenu(s):
@@ -419,12 +482,12 @@ def buymenu(s):
     if checkInventory(s, selection):
         confirm = input("Please confirm this is the vehicle you want to purchase (y/n): ")
         s.execute("SELECT * FROM Vehicle WHERE v_inventoryId = ?", (selection,))
-        l = '{:>} {:>} {:>} {:>} {:>} {:>} {:>} {:>} {:>}'.format("Vehicle_ID", "Model Name", "Model Year", "Brand Name", "Body Style", "Color", "Price", "Inventory_ID", "Manufacturer")
-        print(l + '\n')
+        l = '{:<10} {:<10} {:>30} {:>25} {:>20} {:>20} {:>20} {:>20} {:>20}'.format("Vehicle_ID  |  ", "Model Name  |  ", "Model Year  |  ", "Brand Name  |  ", "Body Style  |  ", "Color  |  ", "Price  |  ", "Inventory_ID  |  ", "Manufacturer")
+        print(l)
         rows = s.fetchall()
         for row in rows:
-            l = '{:>} {:>} {:>} {:>} {:>} {:>} {:>} {:>} {:>}'.format(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8])
-            print(l + "\n")
+            l = '{:<10} {:<10} {:>30} {:>25} {:>20} {:>20} {:>20} {:>20} {:>20}'.format(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8])
+            print(l)
         if confirm == 'y' or confirm == 'yes':
             s.execute("SELECT i_location FROM Inventory WHERE i_inventoryId = ?;", (selection,))
             res = s.fetchall()
@@ -481,7 +544,7 @@ def getCID(s, cName):
     res = s.fetchall()
     return res[0][0]
 
-def getInvId(s, vinNum)
+def getInvId(s, vinNum):
     s.execute("SELECT i_inventoryId FROM Inventory WHERE i_vin = ?;", (vinNum,))
     res = s.fetchall()
     return res[0][0]
